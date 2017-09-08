@@ -292,7 +292,7 @@ plotCcBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05,
   rr <- seq(1, R, by=.025)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f){getCaseConBurdenPower(R, N, r, q, f)}, N, r, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f, p_thres_cc_burden){getCaseConBurdenPower(R, N, r, q, f, p_thres_cc_burden)}, N, r, q, f, p_thres_cc_burden)))
 
   # Print result to a PDF
   rrName <- paste(name,"_CC_Burden_RelRisk_q_",q,"_f_",f,".pdf", sep = "")
@@ -328,7 +328,7 @@ plotCcBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05, n
   nn <- seq(1, N, by=1000)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f){getCaseConBurdenPower(R, N, r, q, f)}, R, r, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f, p_thres_cc_burden){getCaseConBurdenPower(R, N, r, q, f, p_thres_cc_burden)}, R, r, q, f, p_thres_cc_burden)))
 
   # Print result to a PDF
   nnName <- paste(name,"_CC_Burden_SampSize_q_",q,"_f_",f,".pdf", sep = "")
@@ -364,7 +364,7 @@ plotDnBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_denovo_burden=0
   rr <- seq(1, R, by=.1)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f){getDeNovoBurdenPower(R, N, r, q, f)}, N, r, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f, p_thres_denovo_burden){getDeNovoBurdenPower(R, N, r, q, f, p_thres_denovo_burden)}, N, r, q, f, p_thres_denovo_burden)))
 
   # Print result to a PDF
   rrName <- paste(name,"_DN_Burden_RelRisk_q_",q,"_f_",f,".pdf", sep = "")
@@ -400,7 +400,7 @@ plotDnBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_denovo_burden=0.0
   nn <- seq(1, N, by=100)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f){getDeNovoBurdenPower(R, N, r, q, f)}, R, r, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f, p_thres_denovo_burden){getDeNovoBurdenPower(R, N, r, q, f, p_thres_denovo_burden)}, R, r, q, f, p_thres_denovo_burden)))
 
   # Print result to a PDF
   nnName <- paste(name,"_DN_Burden_SampSize_q_",q,"_f_",f,".pdf", sep = "")
@@ -493,7 +493,7 @@ plotDnLocusBySampleSize <- function(R, N, r=1, q, f, p_thres_denovo_locus=0.05, 
 #' @examples
 #' getCaseConBurdenPower(2.5, 20000, 1, 1.26, 0.2)
 #' @export
-getCaseConBurdenPower <- function (R, N, r, q, f){
+getCaseConBurdenPower <- function (R, N, r, q, f, p_thres_cc_burden){
   # Number of variants in controls
   conNum <- q * N
   # Number of variants in cases
@@ -518,7 +518,7 @@ getCaseConBurdenPower <- function (R, N, r, q, f){
 #' @examples
 #' getDeNovoBurdenPower(25, 5000, 1, 0.0249, 0.2)
 #' @export
-getDeNovoBurdenPower <- function (R, N, r, q, f){
+getDeNovoBurdenPower <- function (R, N, r, q, f, p_thres_denovo_burden){
   # Number of variants in controls
   conNum <- q * N
   # Number of variants in cases

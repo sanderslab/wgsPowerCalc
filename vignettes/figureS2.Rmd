@@ -18,53 +18,55 @@ library(wgsPowerCalc)
 setwd("/Users/phanair/Dropbox/Papers_author/WGS_Paper/ReReResubmitted_Aug2017/WGS_Power")
 ```
 
-## Figure S2A - De novo cohort, burden analysis, varying relative risk
+## Figure S2A - De novo cohort, burden analysis, varying sample size
 ```{r}
 # These values are constant for all seven analyses
 p_thres_denovo_burden <- 0.05 / 1000 # p-value threshold (1000 hypotheses)
 R <- 5 # Maximum relative risk
 N <- 20000 # Sample size
+r <- 1 # Case:Control ratio 
 
 # 500 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=25*0.0996, f=0.05/25, p_thres_denovo_burden, name="FigS2A_500", col="#a65628") 
+plotDnBurdenBySampleSize(R, N, r, q=25*0.0996, f=0.05/25, p_thres_denovo_burden, name="FigS2A_500", col="#a65628") 
 # 200 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=10*0.0996, f=0.05/10, p_thres_denovo_burden, name="FigS2A_200", col="#ffff33") 
+plotDnBurdenBySampleSize(R, N, r, q=10*0.0996, f=0.05/10, p_thres_denovo_burden, name="FigS2A_200", col="#ffff33") 
 # 100 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=5*0.0996, f=0.05/5, p_thres_denovo_burden, name="FigS2A_100", col="#ff7f00") 
+plotDnBurdenBySampleSize(R, N, r, q=5*0.0996, f=0.05/5, p_thres_denovo_burden, name="FigS2A_100", col="#ff7f00") 
 # 50 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=2.5*0.0996, f=0.05/2.5, p_thres_denovo_burden, name="FigS2A_50", col="#984ea3")
+plotDnBurdenBySampleSize(R, N, r, q=2.5*0.0996, f=0.05/2.5, p_thres_denovo_burden, name="FigS2A_50", col="#984ea3")
 # 20 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=1*0.0996, f=0.05/1, p_thres_denovo_burden, name="FigS2A_20", col="#4daf4a") 
+plotDnBurdenBySampleSize(R, N, r, q=1*0.0996, f=0.05/1, p_thres_denovo_burden, name="FigS2A_20", col="#4daf4a") 
 # 10 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=0.5*0.0996, f=0.05/0.5, p_thres_denovo_burden, name="FigS2A_10", col="#377eb8") 
+plotDnBurdenBySampleSize(R, N, r, q=0.5*0.0996, f=0.05/0.5, p_thres_denovo_burden, name="FigS2A_10", col="#377eb8") 
 # 5 non-risk variants to 1 risk variants
-plotDnBurdenBySampleSize(R, N, q=0.25*0.0996, f=0.05/0.25, p_thres_denovo_burden, name="FigS2A_5", col="#e41a1c") 
+plotDnBurdenBySampleSize(R, N, r, q=0.25*0.0996, f=0.05/0.25, p_thres_denovo_burden, name="FigS2A_5", col="#e41a1c") 
 ```
 
-## Figure S2B - Case control cohort, burden analysis, varying relative risk
+## Figure S2B - Case control cohort, burden analysis, varying sample size
 ```{r}
 # These values are constant for all seven analyses
 p_thres_cc_burden <- 0.05 / 1000 # p-value threshold (1000 hypotheses)
 R <- 1.2 # Maximum relative risk
 N <- 200000 # Sample size
+r <- 1 # Case:Control ratio 
 
 # 500 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=25*5.04, f=0.05/25, p_thres_denovo_burden, name="FigS2B_500", col="#a65628") 
+plotCcBurdenBySampleSize(R, N, r, q=25*5.04, f=0.05/25, p_thres_cc_burden, name="FigS2B_500", col="#a65628") 
 # 200 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=10*5.04, f=0.05/10, p_thres_denovo_burden, name="FigS2B_200", col="#ffff33") 
+plotCcBurdenBySampleSize(R, N, r, q=10*5.04, f=0.05/10, p_thres_cc_burden, name="FigS2B_200", col="#ffff33") 
 # 100 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=5*5.04, f=0.05/5, p_thres_denovo_burden, name="FigS2B_100", col="#ff7f00") 
+plotCcBurdenBySampleSize(R, N, r, q=5*5.04, f=0.05/5, p_thres_cc_burden, name="FigS2B_100", col="#ff7f00") 
 # 50 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=2.5*5.04, f=0.05/2.5, p_thres_denovo_burden, name="FigS2B_50", col="#984ea3")
+plotCcBurdenBySampleSize(R, N, r, q=2.5*5.04, f=0.05/2.5, p_thres_cc_burden, name="FigS2B_50", col="#984ea3")
 # 20 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=1*5.04, f=0.05/1, p_thres_denovo_burden, name="FigS2B_20", col="#4daf4a") 
+plotCcBurdenBySampleSize(R, N, r, q=1*5.04, f=0.05/1, p_thres_cc_burden, name="FigS2B_20", col="#4daf4a") 
 # 10 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=0.5*5.04, f=0.05/0.5, p_thres_denovo_burden, name="FigS2B_10", col="#377eb8") 
+plotCcBurdenBySampleSize(R, N, r, q=0.5*5.04, f=0.05/0.5, p_thres_cc_burden, name="FigS2B_10", col="#377eb8") 
 # 5 non-risk variants to 1 risk variants
-plotCcBurdenBySampleSize(R, N, q=0.25*5.04, f=0.05/0.25, p_thres_denovo_burden, name="FigS2B_5", col="#e41a1c") 
+plotCcBurdenBySampleSize(R, N, r, q=0.25*5.04, f=0.05/0.25, p_thres_cc_burden, name="FigS2B_5", col="#e41a1c") 
 ```
 
-## Figure S2C - De novo cohort, locus analysis, varying relative risk
+## Figure S2C - De novo cohort, locus analysis, varying sample size
 ```{r}
 # These values are constant for all seven analyses
 p_thres_denovo_locus <- 0.05 / 20000 # p-value threshold (20000 genes)
@@ -73,45 +75,45 @@ N <- 20000 # Sample size
 r <- 1 # Case:Control ratio 
 
 # 500 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=25*0.0996, f=0.05/25, r, p_thres_denovo_locus, name="FigS2C_500", col="#a65628") 
+plotDnLocusBySampleSize(R, N, r, q=25*0.0996, f=0.05/25, p_thres_denovo_locus, name="FigS2C_500", col="#a65628") 
 # 200 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=10*0.0996, f=0.05/10, r, p_thres_denovo_locus, name="FigS2C_200", col="#ffff33") 
+plotDnLocusBySampleSize(R, N, r, q=10*0.0996, f=0.05/10, p_thres_denovo_locus, name="FigS2C_200", col="#ffff33") 
 # 100 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=5*0.0996, f=0.05/5, r, p_thres_denovo_locus, name="FigS2C_100", col="#ff7f00") 
+plotDnLocusBySampleSize(R, N, r, q=5*0.0996, f=0.05/5, p_thres_denovo_locus, name="FigS2C_100", col="#ff7f00") 
 # 50 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=2.5*0.0996, f=0.05/2.5, r, p_thres_denovo_locus, name="FigS2C_50", col="#984ea3")
+plotDnLocusBySampleSize(R, N, r, q=2.5*0.0996, f=0.05/2.5, p_thres_denovo_locus, name="FigS2C_50", col="#984ea3")
 # 20 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=1*0.0996, f=0.05/1, r, p_thres_denovo_locus, name="FigS2C_20", col="#4daf4a") 
+plotDnLocusBySampleSize(R, N, r, q=1*0.0996, f=0.05/1, p_thres_denovo_locus, name="FigS2C_20", col="#4daf4a") 
 # 10 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=0.5*0.0996, f=0.05/0.5, r, p_thres_denovo_locus, name="FigS2C_10", col="#377eb8") 
+plotDnLocusBySampleSize(R, N, r, q=0.5*0.0996, f=0.05/0.5, p_thres_denovo_locus, name="FigS2C_10", col="#377eb8") 
 # 5 non-risk variants to 1 risk variants
-plotDnLocusBySampleSize(R, N, q=0.25*0.0996, f=0.05/0.25, r, p_thres_denovo_locus, name="FigS2C_5", col="#e41a1c") 
+plotDnLocusBySampleSize(R, N, r, q=0.25*0.0996, f=0.05/0.25, p_thres_denovo_locus, name="FigS2C_5", col="#e41a1c") 
 ```
 
-## Figure S2D - Case control cohort, locus analysis, varying relative risk
+## Figure S2D - Case control cohort, locus analysis, varying sample size
 ```{r}
 # These values are constant for all seven analyses
 p_thres_cc_locus_single <- 0.05 / 3000000000 # p-value threshold (3000000000 nucloetides in genome)
 R <- 1.2 # Maximum relative risk
 N <- 200000 # Sample size
 r <- 1 # Case:Control ratio
+f_gene <- 123 # Number of possible functional rare variants per gene
 K <- 0.01 # Prevalence
 AF_bar <- 0.001 # Average rare variant minor allele frequency
-f_gene <- 123 # Number of possible functional rare variants per gene
 N_rep <- 500 # Number of replications (increase for weakly powered analyses)
 
 # 500 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=25*20*f_gene, AF_bar, N_rep, R, f=0.05/25, K, N, r, p_thres_cc_locus_single, name="FigS2D_500", col="#a65628") 
+plotCcLocusSingleBySampleSize(R, N, r, s=25*20*f_gene, f_gene, f=0.05/25, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_500", col="#a65628") 
 # 200 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=10*20*f_gene, AF_bar, N_rep, R, f=0.05/10, K, N, r, p_thres_cc_locus_single, name="FigS2D_200", col="#ffff33") 
+plotCcLocusSingleBySampleSize(R, N, r, s=10*20*f_gene, f_gene, f=0.05/10, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_200", col="#ffff33") 
 # 100 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=5*20*f_gene, AF_bar, N_rep, R, f=0.05/5, K, N, r, p_thres_cc_locus_single, name="FigS2D_100", col="#ff7f00") 
+plotCcLocusSingleBySampleSize(R, N, r, s=5*20*f_gene, f_gene, f=0.05/5, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_100", col="#ff7f00") 
 # 50 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=2.5*20*f_gene, AF_bar, N_rep, R, f=0.05/2.5, K, N, r, p_thres_cc_locus_single, name="FigS2D_50", col="#984ea3")
+plotCcLocusSingleBySampleSize(R, N, r, s=2.5*20*f_gene, f_gene, f=0.05/2.5, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_50", col="#984ea3")
 # 20 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=1*20*f_gene, AF_bar, N_rep, R, f=0.05/1, K, N, r, p_thres_cc_locus_single, name="FigS2D_20", col="#4daf4a") 
+plotCcLocusSingleBySampleSize(R, N, r, s=1*20*f_gene, f_gene, f=0.05/1, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_20", col="#4daf4a") 
 # 10 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=0.5*20*f_gene, AF_bar, N_rep, R, f=0.05/0.5, K, N, r, p_thres_cc_locus_single, name="FigS2D_10", col="#377eb8") 
+plotCcLocusSingleBySampleSize(R, N, r, s=0.5*20*f_gene, f_gene, f=0.05/0.5, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_10", col="#377eb8") 
 # 5 non-risk variants to 1 risk variants
-plotCcLocusSingleBySampleSize(f_gene, s=0.25*20*f_gene, AF_bar, N_rep, R, f=0.05/0.25, K, N, r, p_thres_cc_locus_single, name="FigS2D_5", col="#e41a1c") 
+plotCcLocusSingleBySampleSize(R, N, r, s=0.25*20*f_gene, f_gene, f=0.05/0.25, K, AF_bar, N_rep, p_thres_cc_locus_single, name="FigS2D_5", col="#e41a1c")  
 ```

@@ -1,0 +1,13 @@
+Package: wgsPowerCalc
+Title: Whole Genome Sequencing Power Calculations
+Version: 0.0.0.9000
+Authors@R: c(person("Huang", "Hailiang", role = c("aut")), person("Neale", "Benjamin", role = c("aut")), person("Sanders", "Stephan", email="stephan.sanders@ucsf.edu", role = c("aut", "cre")))
+Description: This package performs power calculations for whole genome sequencing in case/control and family/de novo cohorts. Power analyses can be for an overall excess of variants in cases (burden) or for discovery of a specific risk region (locus). A wide range of variables can be modified, including sample size, relative risk, and the percent of variants that mediate risk. The results are printed to PDFs that show power as sample size or relative risk are varied.
+Depends: R (>= 3.2.2)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

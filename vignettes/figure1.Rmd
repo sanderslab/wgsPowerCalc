@@ -1,0 +1,119 @@
+---
+title: "WGSPD Figure 1"
+author: "Stephan Sanders"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Initial settings
+stuff this a lab book
+```{r}
+# Load the WGS power calculation package
+library(wgsPowerCalc)
+
+# Set the working directory
+setwd("/Users/phanair/Dropbox/Papers_author/WGS_Paper/ReReResubmitted_Aug2017/WGS_Power")
+```
+
+## Figure 1A - De novo cohort, burden analysis, varying relative risk
+```{r}
+# These values are constant for all seven analyses
+p_thres_denovo_burden <- 0.05 / 1000 # p-value threshold (1000 hypotheses)
+R <- 25 # Maximum relative risk
+N <- 5000 # Sample size
+
+# 500 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=25*0.0996, f=0.05/25, p_thres_denovo_burden, name="Fig1A_500", col="#a65628") 
+# 200 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=10*0.0996, f=0.05/10, p_thres_denovo_burden, name="Fig1A_200", col="#ffff33") 
+# 100 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=5*0.0996, f=0.05/5, p_thres_denovo_burden, name="Fig1A_100", col="#ff7f00") 
+# 50 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=2.5*0.0996, f=0.05/2.5, p_thres_denovo_burden, name="Fig1A_50", col="#984ea3")
+# 20 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=1*0.0996, f=0.05/1, p_thres_denovo_burden, name="Fig1A_20", col="#4daf4a") 
+# 10 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=0.5*0.0996, f=0.05/0.5, p_thres_denovo_burden, name="Fig1A_10", col="#377eb8") 
+# 5 non-risk variants to 1 risk variants
+plotDnBurdenByRelativeRisk(R, N, q=0.25*0.0996, f=0.05/0.25, p_thres_denovo_burden, name="Fig1A_5", col="#e41a1c") 
+```
+
+## Figure 1B - Case control cohort, burden analysis, varying relative risk
+```{r}
+# These values are constant for all seven analyses
+p_thres_cc_burden <- 0.05 / 1000 # p-value threshold (1000 hypotheses)
+R <- 2.5 # Maximum relative risk
+N <- 20000 # Sample size
+
+# 500 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=25*5.04, f=0.05/25, p_thres_denovo_burden, name="Fig1B_500", col="#a65628") 
+# 200 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=10*5.04, f=0.05/10, p_thres_denovo_burden, name="Fig1B_200", col="#ffff33") 
+# 100 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=5*5.04, f=0.05/5, p_thres_denovo_burden, name="Fig1B_100", col="#ff7f00") 
+# 50 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=2.5*5.04, f=0.05/2.5, p_thres_denovo_burden, name="Fig1B_50", col="#984ea3")
+# 20 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=1*5.04, f=0.05/1, p_thres_denovo_burden, name="Fig1B_20", col="#4daf4a") 
+# 10 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=0.5*5.04, f=0.05/0.5, p_thres_denovo_burden, name="Fig1B_10", col="#377eb8") 
+# 5 non-risk variants to 1 risk variants
+plotCcBurdenByRelativeRisk(R, N, q=0.25*5.04, f=0.05/0.25, p_thres_denovo_burden, name="Fig1B_5", col="#e41a1c") 
+```
+
+## Figure 1C - De novo cohort, locus analysis, varying relative risk
+```{r}
+# These values are constant for all seven analyses
+p_thres_denovo_locus <- 0.05 / 20000 # p-value threshold (20000 genes)
+R <- 25 # Maximum relative risk
+N <- 5000 # Sample size
+r <- 1 # Case:Control ratio 
+
+# 500 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=25*0.0996, f=0.05/25, r, p_thres_denovo_locus, name="Fig1C_500", col="#a65628") 
+# 200 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=10*0.0996, f=0.05/10, r, p_thres_denovo_locus, name="Fig1C_200", col="#ffff33") 
+# 100 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=5*0.0996, f=0.05/5, r, p_thres_denovo_locus, name="Fig1C_100", col="#ff7f00") 
+# 50 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=2.5*0.0996, f=0.05/2.5, r, p_thres_denovo_locus, name="Fig1C_50", col="#984ea3")
+# 20 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=1*0.0996, f=0.05/1, r, p_thres_denovo_locus, name="Fig1C_20", col="#4daf4a") 
+# 10 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=0.5*0.0996, f=0.05/0.5, r, p_thres_denovo_locus, name="Fig1C_10", col="#377eb8") 
+# 5 non-risk variants to 1 risk variants
+plotDnLocusByRelativeRisk(R, N, q=0.25*0.0996, f=0.05/0.25, r, p_thres_denovo_locus, name="Fig1C_5", col="#e41a1c") 
+```
+
+## Figure 1D - Case control cohort, locus analysis, varying relative risk
+```{r}
+# These values are constant for all seven analyses
+p_thres_cc_locus_single <- 0.05 / 3000000000 # p-value threshold (3000000000 nucloetides in genome)
+R <- 2.5 # Maximum relative risk
+N <- 20000 # Sample size
+r <- 1 # Case:Control ratio
+K <- 0.01 # Prevalence
+AF_bar <- 0.001 # Average rare variant minor allele frequency
+f_gene <- 123 # Number of possible functional rare variants per gene
+N_rep <- 100 # Number of replications (increase for weakly powered analyses)
+
+# 500 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=25*20*f_gene, AF_bar, N_rep, R, f=0.05/25, K, N, r, p_thres_cc_locus_single, name="Fig1D_500", col="#a65628") 
+# 200 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=10*20*f_gene, AF_bar, N_rep, R, f=0.05/10, K, N, r, p_thres_cc_locus_single, name="Fig1D_200", col="#ffff33") 
+# 100 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=5*20*f_gene, AF_bar, N_rep, R, f=0.05/5, K, N, r, p_thres_cc_locus_single, name="Fig1D_100", col="#ff7f00") 
+# 50 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=2.5*20*f_gene, AF_bar, N_rep, R, f=0.05/2.5, K, N, r, p_thres_cc_locus_single, name="Fig1D_50", col="#984ea3")
+# 20 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=1*20*f_gene, AF_bar, N_rep, R, f=0.05/1, K, N, r, p_thres_cc_locus_single, name="Fig1D_20", col="#4daf4a") 
+# 10 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=0.5*20*f_gene, AF_bar, N_rep, R, f=0.05/0.5, K, N, r, p_thres_cc_locus_single, name="Fig1D_10", col="#377eb8") 
+# 5 non-risk variants to 1 risk variants
+plotCcLocusSingleByRelativeRisk(f_gene, s=0.25*20*f_gene, AF_bar, N_rep, R, f=0.05/0.25, K, N, r, p_thres_cc_locus_single, name="Fig1D_5", col="#e41a1c") 
+```
+

@@ -1,34 +1,34 @@
 #' Tests the power to detect a single locus using case control data varying relative risk.
 #'
-#' @param f_gene Number of possible functional rare variants per gene (numeric).
-#' @param s Number of possible rare variants per gene (numeric).
-#' @param AF_bar Average minor allele frequency (numeric, 0-1).
-#' @param N_rep Number of replicate simulations (integer).
 #' @param R Maximum relative risk (numeric).
-#' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
-#' @param K Prevalence of the disorder (numeric, 0-1).
 #' @param N Sample size (integer).
 #' @param r Case:Control ratio (numeric).
+#' @param s Number of possible rare variants per gene (numeric).
+#' @param f_gene Number of possible functional rare variants per gene (numeric).
+#' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
+#' @param K Prevalence of the disorder (numeric, 0-1).
+#' @param AF_bar Average minor allele frequency (numeric, 0-1).
+#' @param N_rep Number of replicate simulations (integer).
 #' @param p_thres_cc_locus_single p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
 #' @param col Color of the line (hex).
 #' @return A PDF showing the estimated statistical power as the relative risk is varied.
 #' @examples
-#' f_gene <- 123
-#' s <- 615
-#' AF_bar <- 0.001
-#' N_rep <- 50
 #' R <- 2.5
-#' f <- 0.2
-#' K <- 0.01
 #' N <- 20000
 #' r <- 1
+#' s <- 615
+#' f_gene <- 123
+#' f <- 0.2
+#' K <- 0.01
+#' AF_bar <- 0.001
+#' N_rep <- 50
 #' p_thres_cc_locus_single <- 0.05 / 3000000000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotCcLocusSingleByRelativeRisk()
 #' @export
-plotCcLocusSingleByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r, p_thres_cc_locus_single=0.05, name="Test", col="#e41a1c"){
+plotCcLocusSingleByRelativeRisk <- function(R, N, r=1, s, f_gene, f, K, AF_bar, N_rep, p_thres_cc_locus_single=0.05, name="Test", col="#e41a1c"){
 
   if(f_gene > s){
     stop("Number of functonal variant must be less than total number of variants.", call. = FALSE)
@@ -52,7 +52,7 @@ plotCcLocusSingleByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N
   # For each replicate estimate power at each relative risk
   power_single <- c()
   for (i_rep in c(1:N_rep)){
-    power_single <- cbind(power_single, unlist(lapply(rr, function(R, f, AF, K, N, r, p_thres_cc_locus_single) {getSingleVarLocusPower(f, AF, R, K, N, r, p_thres_cc_locus_single)}, f_gene, AF_save[,i_rep],  K, N, r, p_thres_cc_locus_single)))
+    power_single <- cbind(power_single, unlist(lapply(rr, function(R, f, AF, K, N, r=1, p_thres_cc_locus_single) {getSingleVarLocusPower(f, AF, R, K, N, r, p_thres_cc_locus_single)}, f_gene, AF_save[,i_rep],  K, N, r, p_thres_cc_locus_single)))
   }
 
   # Print result to a PDF
@@ -65,35 +65,35 @@ plotCcLocusSingleByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N
 
 #' Tests the power to detect a single locus using case control data varying sample size
 #'
-#' @param f_gene Number of possible functional rare variants per gene (numeric).
-#' @param s Number of possible rare variants per gene (numeric).
-#' @param AF_bar Average minor allele frequency (numeric, 0-1).
-#' @param N_rep Number of replicate simulations (integer).
 #' @param R Relative risk (numeric).
-#' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
-#' @param K Prevalence of the disorder (numeric, 0-1).
 #' @param N Maximum sample size (integer).
 #' @param r Case:Control ratio (numeric).
+#' @param s Number of possible rare variants per gene (numeric).
+#' @param f_gene Number of possible functional rare variants per gene (numeric).
+#' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
+#' @param K Prevalence of the disorder (numeric, 0-1).
+#' @param AF_bar Average minor allele frequency (numeric, 0-1).
+#' @param N_rep Number of replicate simulations (integer).
 #' @param p_thres_cc_locus_single p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
 #' @param col Color of the line (hex).
 #' @return A PDF showing the estimated statistical power as the sample size is varied.
 #' @examples
-#' f_gene <- 123
-#' s <- 615
-#' AF_bar <- 0.001
-#' N_rep <- 50
 #' R <- 2.5
-#' f <- 0.2
-#' K <- 0.01
 #' N <- 20000
 #' r <- 1
+#' s <- 615
+#' f_gene <- 123
+#' f <- 0.2
+#' K <- 0.01
+#' AF_bar <- 0.001
+#' N_rep <- 50
 #' p_thres_cc_locus_single <- 0.05 / 3000000000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotCcLocusSingleBySampleSize()
 #' @export
-plotCcLocusSingleBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r, p_thres_cc_locus_single=0.05, name="Test", col="#e41a1c"){
+plotCcLocusSingleBySampleSize <- function(R, N, r=1, s, f_gene, f, K, AF_bar, N_rep, p_thres_cc_locus_single=0.05, name="Test", col="#e41a1c"){
 
   if(f_gene > s){
     stop("Number of functonal variant must be less than total number of variants.", call. = FALSE)
@@ -117,7 +117,7 @@ plotCcLocusSingleBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, 
   # For each replicate estimate power at each sample size
   power_single <- c()
   for (i_rep in c(1:N_rep)){
-    power_single <- cbind(power_single, unlist(lapply(nn, function(N, f, AF, K, R, r, p_thres_cc_locus_single) {getSingleVarLocusPower(f, AF, R, K, N, r, p_thres_cc_locus_single)}, f_gene, AF_save[,i_rep],  K, R, r, p_thres_cc_locus_single)))
+    power_single <- cbind(power_single, unlist(lapply(nn, function(N, f, AF, K, R, r=1, p_thres_cc_locus_single) {getSingleVarLocusPower(f, AF, R, K, N, r, p_thres_cc_locus_single)}, f_gene, AF_save[,i_rep],  K, R, r, p_thres_cc_locus_single)))
   }
 
   # Print result to a PDF
@@ -130,35 +130,35 @@ plotCcLocusSingleBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, 
 
 #' Tests the power to detect a gene locus (i.e. locus defined by a gene rather than variant) using case control data varying relative risk.
 #'
-#' @param f_gene Number of possible functional rare variants per gene (numeric).
-#' @param s Number of possible rare variants per gene (numeric).
-#' @param AF_bar Average minor allele frequency (numeric, 0-1).
-#' @param N_rep Number of replicate simulations (integer).
+#' @param N Sample size (integer).
 #' @param R Maximum relative risk (numeric).
+#' @param r Case:Control ratio (numeric).
+#' @param s Number of possible rare variants per gene (numeric).
+#' @param f_gene Number of possible functional rare variants per gene (numeric).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param K Prevalence of the disorder (numeric, 0-1).
-#' @param N Sample size (integer).
-#' @param r Case:Control ratio (numeric).
+#' @param AF_bar Average minor allele frequency (numeric, 0-1).
+#' @param N_rep Number of replicate simulations (integer).
 #' @param p_thres_cc_locus_multi p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
 #' @param col Color of the line (hex).
 #' @return A PDF showing the estimated statistical power as the relative risk is varied.
 #' @examples
-#' f_gene <- 123
-#' s <- 615
-#' AF_bar <- 0.001
-#' N_rep <- 50
 #' R <- 2.5
-#' f <- 0.2
-#' K <- 0.01
 #' N <- 20000
 #' r <- 1
+#' s <- 615
+#' f_gene <- 123
+#' f <- 0.2
+#' K <- 0.01
+#' AF_bar <- 0.001
+#' N_rep <- 50
 #' p_thres_cc_locus_multi <- 0.05 / 20000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotCcLocusMultiByRelativeRisk()
 #' @export
-plotCcLocusMultiByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r, p_thres_cc_locus_multi=0.05, name="Test", col="#e41a1c"){
+plotCcLocusMultiByRelativeRisk <- function(R, N, r=1, s, f_gene, f, K, AF_bar, N_rep, p_thres_cc_locus_multi=0.05, name="Test", col="#e41a1c"){
 
   if(f_gene > s){
     stop("Number of functonal variant must be less than total number of variants.", call. = FALSE)
@@ -185,7 +185,7 @@ plotCcLocusMultiByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N,
   # For each replicate estimate power at each relative risk
   power_multi <- c()
   for (i_rep in c(1:N_rep)){
-    power_multi <- cbind(power_multi, unlist(lapply(rr, function(R, f, AF, sum_var, K, N, r, p_thres_cc_locus_multi){getMultiVarLocusPower(f, AF, sum_var, R, K, N, r, p_thres_cc_locus_multi)}, f_gene, AF_save[,i_rep], sum_var[i_rep], K, N, r, p_thres_cc_locus_multi )))
+    power_multi <- cbind(power_multi, unlist(lapply(rr, function(R, f, AF, sum_var, K, N, r=1, p_thres_cc_locus_multi){getMultiVarLocusPower(f, AF, sum_var, R, K, N, r, p_thres_cc_locus_multi)}, f_gene, AF_save[,i_rep], sum_var[i_rep], K, N, r, p_thres_cc_locus_multi )))
   }
 
   # Print result to a PDF
@@ -198,35 +198,36 @@ plotCcLocusMultiByRelativeRisk <- function(f_gene, s, AF_bar, N_rep, R, f, K, N,
 
 #' Tests the power to detect a gene locus (i.e. locus defined by a gene rather than variant) using case control data varying sample size.
 #'
-#' @param f_gene Number of possible functional rare variants per gene (numeric).
-#' @param s Number of possible rare variants per gene (numeric).
-#' @param AF_bar Average minor allele frequency (numeric, 0-1).
-#' @param N_rep Number of replicate simulations (integer).
+#' @param N Maximum sample size (integer).
 #' @param R Relative risk (numeric).
+#' @param r Case:Control ratio (numeric).
+#' @param s Number of possible rare variants per gene (numeric).
+#' @param f_gene Number of possible functional rare variants per gene (numeric).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param K Prevalence of the disorder (numeric, 0-1).
-#' @param N Maximum sample size (integer).
-#' @param r Case:Control ratio (numeric).
+#' @param AF_bar Average minor allele frequency (numeric, 0-1).
+#' @param N_rep Number of replicate simulations (integer).
 #' @param p_thres_cc_locus_multi p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
 #' @param col Color of the line (hex).
 #' @return A PDF showing the estimated statistical power as the sample size is varied.
 #' @examples
-#' f_gene <- 123
-#' s <- 615
-#' AF_bar <- 0.001
-#' N_rep <- 50
 #' R <- 2.5
-#' f <- 0.2
-#' K <- 0.01
 #' N <- 20000
 #' r <- 1
+#' s <- 615
+#' f_gene <- 123
+#' f <- 0.2
+#' K <- 0.01
+#' AF_bar <- 0.001
+#' N_rep <- 50
 #' p_thres_cc_locus_multi <- 0.05 / 20000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotCcLocusMultiBySampleSize()
 #' @export
-plotCcLocusMultiBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r, p_thres_cc_locus_multi=0.05, name="Test", col="#e41a1c"){
+
+plotCcLocusMultiBySampleSize <- function(R, N, r=1, s, f_gene, f, K, AF_bar, N_rep, p_thres_cc_locus_multi=0.05, name="Test", col="#e41a1c"){
 
   if(f_gene > s){
     stop("Number of functonal variant must be less than total number of variants.", call. = FALSE)
@@ -253,7 +254,7 @@ plotCcLocusMultiBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r
   # For each replicate estimate power at each sample size
   power_multi <- c()
   for (i_rep in c(1:N_rep)){
-    power_multi <- cbind(power_multi, unlist(lapply(nn, function(N, f, AF, sum_var, K, R, r, p_thres_cc_locus_multi){getMultiVarLocusPower(f, AF, sum_var, R, K, N, r, p_thres_cc_locus_multi)}, f_gene, AF_save[,i_rep], sum_var[i_rep], K, R, r, p_thres_cc_locus_multi )))
+    power_multi <- cbind(power_multi, unlist(lapply(nn, function(N, f, AF, sum_var, K, R, r=1, p_thres_cc_locus_multi){getMultiVarLocusPower(f, AF, sum_var, R, K, N, r, p_thres_cc_locus_multi)}, f_gene, AF_save[,i_rep], sum_var[i_rep], K, R, r, p_thres_cc_locus_multi )))
   }
 
   # Print result to a PDF
@@ -269,6 +270,7 @@ plotCcLocusMultiBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r
 #'
 #' @param R Maximum relative risk (numeric).
 #' @param N Sample size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Number of functional rare variants per person in seleceted regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param p_thres_cc_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
@@ -278,6 +280,7 @@ plotCcLocusMultiBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r
 #' @examples
 #' R <- 2.5
 #' N <- 20000
+#' r <- 1
 #' q <- 126
 #' f <- 0.2
 #' p_thres_cc_burden <- 0.05 / 1000
@@ -285,7 +288,7 @@ plotCcLocusMultiBySampleSize <- function(f_gene, s, AF_bar, N_rep, R, f, K, N, r
 #' col <- "#e41a1c"
 #' plotCcBurdenByRelativeRisk()
 #' @export
-plotCcBurdenByRelativeRisk <- function (R, N, q, f, p_thres_cc_burden=0.05, name="Test", col="#e41a1c"){
+plotCcBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05, name="Test", col="#e41a1c"){
   rr <- seq(1, R, by=.025)
 
   power_burden <- c()
@@ -303,6 +306,7 @@ plotCcBurdenByRelativeRisk <- function (R, N, q, f, p_thres_cc_burden=0.05, name
 #'
 #' @param R Relative risk (numeric).
 #' @param N Maximum sample size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Number of functional rare variants per person in seleceted regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param p_thres_cc_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
@@ -312,6 +316,7 @@ plotCcBurdenByRelativeRisk <- function (R, N, q, f, p_thres_cc_burden=0.05, name
 #' @examples
 #' R <- 2.5
 #' N <- 20000
+#' r <- 1
 #' q <- 126
 #' f <- 0.2
 #' p_thres_cc_burden <- 0.05 / 1000
@@ -319,7 +324,7 @@ plotCcBurdenByRelativeRisk <- function (R, N, q, f, p_thres_cc_burden=0.05, name
 #' col <- "#e41a1c"
 #' plotCcBurdenBySampleSize()
 #' @export
-plotCcBurdenBySampleSize <- function (R, N, q, f, p_thres_cc_burden=0.05, name="Test", col="#e41a1c"){
+plotCcBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05, name="Test", col="#e41a1c"){
   nn <- seq(1, N, by=1000)
 
   power_burden <- c()
@@ -337,7 +342,8 @@ plotCcBurdenBySampleSize <- function (R, N, q, f, p_thres_cc_burden=0.05, name="
 #'
 #' @param R Maximum relative risk (numeric).
 #' @param N Sample size (integer).
-#' @param q Number of functional rare variants per person in seleceted regions (integer).
+#' @param r Case:Control ratio (numeric).
+#' @param q Number of functional rare variants per person in selected regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param p_thres_denovo_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
@@ -346,6 +352,7 @@ plotCcBurdenBySampleSize <- function (R, N, q, f, p_thres_cc_burden=0.05, name="
 #' @examples
 #' R <- 25
 #' N <- 5000
+#' r <- 1
 #' q <- 0.0249
 #' f <- 0.2
 #' p_thres_denovo_burden <- 0.05 / 1000
@@ -353,7 +360,7 @@ plotCcBurdenBySampleSize <- function (R, N, q, f, p_thres_cc_burden=0.05, name="
 #' col <- "#e41a1c"
 #' plotDnBurdenByRelativeRisk()
 #' @export
-plotDnBurdenByRelativeRisk <- function (R, N, q, f, p_thres_denovo_burden=0.05, name="Test", col="#e41a1c"){
+plotDnBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_denovo_burden=0.05, name="Test", col="#e41a1c"){
   rr <- seq(1, R, by=.1)
 
   power_burden <- c()
@@ -371,7 +378,8 @@ plotDnBurdenByRelativeRisk <- function (R, N, q, f, p_thres_denovo_burden=0.05, 
 #'
 #' @param R Relative risk (numeric).
 #' @param N Maximum Sample size (integer).
-#' @param q Number of functional rare variants per person in seleceted regions (integer).
+#' @param r Case:Control ratio (numeric).
+#' @param q Number of functional rare variants per person in selceted regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param p_thres_denovo_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
@@ -380,6 +388,7 @@ plotDnBurdenByRelativeRisk <- function (R, N, q, f, p_thres_denovo_burden=0.05, 
 #' @examples
 #' R <- 25
 #' N <- 5000
+#' r <- 1
 #' q <- 0.0249
 #' f <- 0.2
 #' p_thres_denovo_burden <- 0.05 / 1000
@@ -387,7 +396,7 @@ plotDnBurdenByRelativeRisk <- function (R, N, q, f, p_thres_denovo_burden=0.05, 
 #' col <- "#e41a1c"
 #' plotDnBurdenBySampleSize()
 #' @export
-plotDnBurdenBySampleSize <- function (R, N, q, f, p_thres_denovo_burden=0.05, name="Test", col="#e41a1c"){
+plotDnBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_denovo_burden=0.05, name="Test", col="#e41a1c"){
   nn <- seq(1, N, by=100)
 
   power_burden <- c()
@@ -406,9 +415,9 @@ plotDnBurdenBySampleSize <- function (R, N, q, f, p_thres_denovo_burden=0.05, na
 #'
 #' @param R Maximum relative risk (numeric).
 #' @param N Sample size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Number of functional rare variants per person in seleceted regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
-#' @param r Case:Control ratio (numeric).
 #' @param p_thres_denovo_locus p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @param name Prefix for plot filenames (text).
 #' @param col Color of the line (hex).
@@ -416,15 +425,15 @@ plotDnBurdenBySampleSize <- function (R, N, q, f, p_thres_denovo_burden=0.05, na
 #' @examples
 #' R <- 25
 #' N <- 5000
+#' r <- 1
 #' q <- 0.0249
 #' f <- 0.2
-#' r <- 1
 #' p_thres_denovo_locus <- 0.05 / 20000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotDnLocusByRelativeRisk()
 #' @export
-plotDnLocusByRelativeRisk <- function(R, N, q, f, r, p_thres_denovo_locus=0.05, name="Test", col="#e41a1c"){
+plotDnLocusByRelativeRisk <- function(R, N, r=1, q, f, p_thres_denovo_locus=0.05, name="Test", col="#e41a1c"){
   rr <- seq(1, R, by=.2)
 
   power_para_selected <- getDeNovoLocusPowerParametric(rr, q, f, N, r, p_thres_denovo_locus)
@@ -441,6 +450,7 @@ plotDnLocusByRelativeRisk <- function(R, N, q, f, r, p_thres_denovo_locus=0.05, 
 #'
 #' @param R Relative risk (numeric).
 #' @param N Maximum sample size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Number of functional rare variants per person in seleceted regions (integer).
 #' @param f Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).
 #' @param r Case:Control ratio (numeric).
@@ -451,15 +461,15 @@ plotDnLocusByRelativeRisk <- function(R, N, q, f, r, p_thres_denovo_locus=0.05, 
 #' @examples
 #' R <- 25
 #' N <- 5000
+#' r <- 1
 #' q <- 0.0249
 #' f <- 0.2
-#' r <- 1
 #' p_thres_denovo_locus <- 0.05 / 20000
 #' name <- "Test1"
 #' col <- "#e41a1c"
 #' plotDnLocusBySampleSize()
 #' @export
-plotDnLocusBySampleSize <- function(R, N, q, f, r, p_thres_denovo_locus=0.05, name="Test", col="#e41a1c"){
+plotDnLocusBySampleSize <- function(R, N, r=1, q, f, p_thres_denovo_locus=0.05, name="Test", col="#e41a1c"){
   nn <- seq(100, N, by=100)
 
   power_para_selected <- getDeNovoLocusPowerParametric(R, q , f, nn, r, p_thres_denovo_locus)
@@ -489,7 +499,6 @@ getCaseConBurdenPower <- function (R, N, q, f){
   caseNum <- ( q * N * f * R ) + ( q * N * (1-f) )
   sd <- 0.91 * conNum/0.67 # Estimate based on SSC exome data
   burden <- caseNum/conNum
-  r <- 1 #Case:Control ratio (numeric).
   
   # Estimate power
   z <- (caseNum-conNum)/(sd*sqrt((1+1/r)/N))
@@ -514,7 +523,6 @@ getDeNovoBurdenPower <- function (R, N, q, f){
   caseNum <- ( q * N * f * R ) + ( q * N * (1-f) )
   sd <- 0.31 * conNum/0.0966 # Estimate based on SSC exome data
   burden <- caseNum/conNum
-  r <- 1 #Case:Control ratio (numeric).
 
   # Estimate power
   z <- (caseNum-conNum)/(sd*sqrt((1+1/r)/N))

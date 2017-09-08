@@ -292,7 +292,7 @@ plotCcBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05,
   rr <- seq(1, R, by=.025)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, q, f){getCaseConBurdenPower(R, N, q, f)}, N, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f){getCaseConBurdenPower(R, N, r, q, f)}, N, r, q, f)))
 
   # Print result to a PDF
   rrName <- paste(name,"_CC_Burden_RelRisk_q_",q,"_f_",f,".pdf", sep = "")
@@ -328,7 +328,7 @@ plotCcBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_cc_burden=0.05, n
   nn <- seq(1, N, by=1000)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, q, f){getCaseConBurdenPower(R, N, q, f)}, R, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f){getCaseConBurdenPower(R, N, r, q, f)}, R, r, q, f)))
 
   # Print result to a PDF
   nnName <- paste(name,"_CC_Burden_SampSize_q_",q,"_f_",f,".pdf", sep = "")
@@ -364,7 +364,7 @@ plotDnBurdenByRelativeRisk <- function (R, N, r=1, q, f, p_thres_denovo_burden=0
   rr <- seq(1, R, by=.1)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, q, f){getDeNovoBurdenPower(R, N, q, f)}, N, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(rr, function(R, N, r, q, f){getDeNovoBurdenPower(R, N, r, q, f)}, N, r, q, f)))
 
   # Print result to a PDF
   rrName <- paste(name,"_DN_Burden_RelRisk_q_",q,"_f_",f,".pdf", sep = "")
@@ -400,7 +400,7 @@ plotDnBurdenBySampleSize <- function (R, N, r=1, q, f, p_thres_denovo_burden=0.0
   nn <- seq(1, N, by=100)
 
   power_burden <- c()
-  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, q, f){getDeNovoBurdenPower(R, N, q, f)}, R, q, f)))
+  power_burden <- cbind(power_burden, unlist(lapply(nn, function(N, R, r, q, f){getDeNovoBurdenPower(R, N, r, q, f)}, R, r, q, f)))
 
   # Print result to a PDF
   nnName <- paste(name,"_DN_Burden_SampSize_q_",q,"_f_",f,".pdf", sep = "")
@@ -486,13 +486,14 @@ plotDnLocusBySampleSize <- function(R, N, r=1, q, f, p_thres_denovo_locus=0.05, 
 #'
 #' @param R Relative Risk (numeric).
 #' @param N Sample Size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Total number of variants within selected regions per control individual (numeric).
 #' @param f Percent of variants within selected regions that mediate disease risk (numeric).
 #' @return The statistical power in a case control cohort.
 #' @examples
-#' getCaseConBurdenPower(2.5, 20000, 1.26, 0.2)
+#' getCaseConBurdenPower(2.5, 20000, 1, 1.26, 0.2)
 #' @export
-getCaseConBurdenPower <- function (R, N, q, f){
+getCaseConBurdenPower <- function (R, N, r, q, f){
   # Number of variants in controls
   conNum <- q * N
   # Number of variants in cases
@@ -510,13 +511,14 @@ getCaseConBurdenPower <- function (R, N, q, f){
 #'
 #' @param R Relative Risk (numeric).
 #' @param N Sample Size (integer).
+#' @param r Case:Control ratio (numeric).
 #' @param q Total number of variants within selected regions per control individual (numeric).
 #' @param f Percent of variants within selected regions that mediate disease risk (numeric).
 #' @return The statistical power in a de novo cohort.
 #' @examples
-#' getDeNovoBurdenPower(25, 5000, 0.0249, 0.2)
+#' getDeNovoBurdenPower(25, 5000, 1, 0.0249, 0.2)
 #' @export
-getDeNovoBurdenPower <- function (R, N, q, f){
+getDeNovoBurdenPower <- function (R, N, r, q, f){
   # Number of variants in controls
   conNum <- q * N
   # Number of variants in cases

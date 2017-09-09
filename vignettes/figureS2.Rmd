@@ -21,6 +21,7 @@ setwd("/path/to/directory/")
 ```
 
 ## Figure S2A - De novo cohort, burden analysis, varying sample size
+Note that multiple PDFs can be placed into Adobe Illustrator together (drag and drop) to combine multiple lines.
 ```{r}
 # These values are constant for all seven analyses
 p_thres_denovo_burden <- 0.05 / 1000 # p-value threshold (1000 hypotheses)

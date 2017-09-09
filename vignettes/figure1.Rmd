@@ -9,14 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Initial settings
-stuff this a lab book
+## Install the wgsPowerCalc project in R:
 ```{r}
-# Load the WGS power calculation package
+devtools::install_github("stephansanders/wgsPowerTest")
 library(wgsPowerCalc)
+```
 
-# Set the working directory
-setwd("/Users/phanair/Dropbox/Papers_author/WGS_Paper/ReReResubmitted_Aug2017/WGS_Power")
+## Set the working directory for where you want the PDFs to be printed
+```{r}
+setwd("/path/to/directory/")
 ```
 
 ## Figure 1A - De novo cohort, burden analysis, varying relative risk

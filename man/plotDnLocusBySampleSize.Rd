@@ -4,7 +4,7 @@
 \alias{plotDnLocusBySampleSize}
 \title{Tests the power to detect a gene locus using de novo data varying sample size.}
 \usage{
-plotDnLocusBySampleSize(R, N, q, f, r, p_thres_denovo_locus = 0.05,
+plotDnLocusBySampleSize(R, N, r = 1, q, f, p_thres_denovo_locus = 0.05,
   name = "Test", col = "#e41a1c")
 }
 \arguments{
@@ -12,17 +12,19 @@ plotDnLocusBySampleSize(R, N, q, f, r, p_thres_denovo_locus = 0.05,
 
 \item{N}{Maximum sample size (integer).}
 
+\item{r}{Case:Control ratio (numeric).}
+
 \item{q}{Number of functional rare variants per person in seleceted regions (integer).}
 
 \item{f}{Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).}
-
-\item{r}{Case:Control ratio (numeric).}
 
 \item{p_thres_denovo_locus}{p-value threshold after correction for multiple comparisons (numeric, 0-1).}
 
 \item{name}{Prefix for plot filenames (text).}
 
 \item{col}{Color of the line (hex).}
+
+\item{r}{Case:Control ratio (numeric).}
 }
 \value{
 A PDF showing the estimated statistical power as the sample size is varied.
@@ -33,9 +35,9 @@ Tests the power to detect a gene locus using de novo data varying sample size.
 \examples{
 R <- 25
 N <- 5000
+r <- 1
 q <- 0.0249
 f <- 0.2
-r <- 1
 p_thres_denovo_locus <- 0.05 / 20000
 name <- "Test1"
 col <- "#e41a1c"

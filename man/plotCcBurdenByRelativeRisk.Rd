@@ -4,13 +4,15 @@
 \alias{plotCcBurdenByRelativeRisk}
 \title{Tests the power to detect a burden difference using case control data varying relative risk.}
 \usage{
-plotCcBurdenByRelativeRisk(R, N, q, f, p_thres_cc_burden = 0.05,
+plotCcBurdenByRelativeRisk(R, N, r = 1, q, f, p_thres_cc_burden = 0.05,
   name = "Test", col = "#e41a1c")
 }
 \arguments{
 \item{R}{Maximum relative risk (numeric).}
 
 \item{N}{Sample size (integer).}
+
+\item{r}{Case:Control ratio (numeric).}
 
 \item{q}{Number of functional rare variants per person in seleceted regions (integer).}
 
@@ -31,6 +33,7 @@ Tests the power to detect a burden difference using case control data varying re
 \examples{
 R <- 2.5
 N <- 20000
+r <- 1
 q <- 126
 f <- 0.2
 p_thres_cc_burden <- 0.05 / 1000

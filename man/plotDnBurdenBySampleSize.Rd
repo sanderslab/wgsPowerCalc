@@ -4,7 +4,7 @@
 \alias{plotDnBurdenBySampleSize}
 \title{Tests the power to detect a burden difference using de novo data varying sample size.}
 \usage{
-plotDnBurdenBySampleSize(R, N, q, f, p_thres_denovo_burden = 0.05,
+plotDnBurdenBySampleSize(R, N, r = 1, q, f, p_thres_denovo_burden = 0.05,
   name = "Test", col = "#e41a1c")
 }
 \arguments{
@@ -12,7 +12,9 @@ plotDnBurdenBySampleSize(R, N, q, f, p_thres_denovo_burden = 0.05,
 
 \item{N}{Maximum Sample size (integer).}
 
-\item{q}{Number of functional rare variants per person in seleceted regions (integer).}
+\item{r}{Case:Control ratio (numeric).}
+
+\item{q}{Number of functional rare variants per person in selceted regions (integer).}
 
 \item{f}{Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).}
 
@@ -31,6 +33,7 @@ Tests the power to detect a burden difference using de novo data varying sample 
 \examples{
 R <- 25
 N <- 5000
+r <- 1
 q <- 0.0249
 f <- 0.2
 p_thres_denovo_burden <- 0.05 / 1000

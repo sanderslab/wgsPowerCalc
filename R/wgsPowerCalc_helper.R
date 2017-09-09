@@ -489,9 +489,10 @@ plotDnLocusBySampleSize <- function(R, N, r=1, q, f, p_thres_denovo_locus=0.05, 
 #' @param r Case:Control ratio (numeric).
 #' @param q Total number of variants within selected regions per control individual (numeric).
 #' @param f Percent of variants within selected regions that mediate disease risk (numeric).
+#' @param p_thres_cc_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @return The statistical power in a case control cohort.
 #' @examples
-#' getCaseConBurdenPower(2.5, 20000, 1, 1.26, 0.2)
+#' getCaseConBurdenPower(2.5, 20000, 1, 1.26, 0.2, 5e-5)
 #' @export
 getCaseConBurdenPower <- function (R, N, r, q, f, p_thres_cc_burden){
   # Number of variants in controls
@@ -514,9 +515,10 @@ getCaseConBurdenPower <- function (R, N, r, q, f, p_thres_cc_burden){
 #' @param r Case:Control ratio (numeric).
 #' @param q Total number of variants within selected regions per control individual (numeric).
 #' @param f Percent of variants within selected regions that mediate disease risk (numeric).
+#' @param p_thres_denovo_burden p-value threshold after correction for multiple comparisons (numeric, 0-1).
 #' @return The statistical power in a de novo cohort.
 #' @examples
-#' getDeNovoBurdenPower(25, 5000, 1, 0.0249, 0.2)
+#' getDeNovoBurdenPower(25, 5000, 1, 0.0249, 0.2, 5e-5)
 #' @export
 getDeNovoBurdenPower <- function (R, N, r, q, f, p_thres_denovo_burden){
   # Number of variants in controls

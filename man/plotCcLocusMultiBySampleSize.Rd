@@ -4,27 +4,27 @@
 \alias{plotCcLocusMultiBySampleSize}
 \title{Tests the power to detect a gene locus (i.e. locus defined by a gene rather than variant) using case control data varying sample size.}
 \usage{
-plotCcLocusMultiBySampleSize(f_gene, s, AF_bar, N_rep, R, f, K, N, r,
+plotCcLocusMultiBySampleSize(R, N, r = 1, s, f_gene, f, K, AF_bar, N_rep,
   p_thres_cc_locus_multi = 0.05, name = "Test", col = "#e41a1c")
 }
 \arguments{
-\item{f_gene}{Number of possible functional rare variants per gene (numeric).}
+\item{R}{Relative risk (numeric).}
+
+\item{N}{Maximum sample size (integer).}
+
+\item{r}{Case:Control ratio (numeric).}
 
 \item{s}{Number of possible rare variants per gene (numeric).}
 
-\item{AF_bar}{Average minor allele frequency (numeric, 0-1).}
-
-\item{N_rep}{Number of replicate simulations (integer).}
-
-\item{R}{Relative risk (numeric).}
+\item{f_gene}{Number of possible functional rare variants per gene (numeric).}
 
 \item{f}{Proportion of functional rare variants that mediate risk for the disorder (numeric, 0-1).}
 
 \item{K}{Prevalence of the disorder (numeric, 0-1).}
 
-\item{N}{Maximum sample size (integer).}
+\item{AF_bar}{Average minor allele frequency (numeric, 0-1).}
 
-\item{r}{Case:Control ratio (numeric).}
+\item{N_rep}{Number of replicate simulations (integer).}
 
 \item{p_thres_cc_locus_multi}{p-value threshold after correction for multiple comparisons (numeric, 0-1).}
 
@@ -39,15 +39,15 @@ A PDF showing the estimated statistical power as the sample size is varied.
 Tests the power to detect a gene locus (i.e. locus defined by a gene rather than variant) using case control data varying sample size.
 }
 \examples{
-f_gene <- 123
-s <- 615
-AF_bar <- 0.001
-N_rep <- 50
 R <- 2.5
-f <- 0.2
-K <- 0.01
 N <- 20000
 r <- 1
+s <- 615
+f_gene <- 123
+f <- 0.2
+K <- 0.01
+AF_bar <- 0.001
+N_rep <- 50
 p_thres_cc_locus_multi <- 0.05 / 20000
 name <- "Test1"
 col <- "#e41a1c"

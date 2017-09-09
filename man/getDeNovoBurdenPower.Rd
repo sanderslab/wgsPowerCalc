@@ -4,16 +4,20 @@
 \alias{getDeNovoBurdenPower}
 \title{Calculate statistical power in a de novo burden analysis.}
 \usage{
-getDeNovoBurdenPower(R, N, q, f)
+getDeNovoBurdenPower(R, N, r, q, f, p_thres_denovo_burden)
 }
 \arguments{
 \item{R}{Relative Risk (numeric).}
 
 \item{N}{Sample Size (integer).}
 
+\item{r}{Case:Control ratio (numeric).}
+
 \item{q}{Total number of variants within selected regions per control individual (numeric).}
 
 \item{f}{Percent of variants within selected regions that mediate disease risk (numeric).}
+
+\item{p_thres_denovo_burden}{p-value threshold after correction for multiple comparisons (numeric, 0-1).}
 }
 \value{
 The statistical power in a de novo cohort.
@@ -22,5 +26,5 @@ The statistical power in a de novo cohort.
 Calculate statistical power in a de novo burden analysis.
 }
 \examples{
-getDeNovoBurdenPower(25, 5000, 0.0249, 0.2)
+getDeNovoBurdenPower(25, 5000, 1, 0.0249, 0.2, 5e-5)
 }
